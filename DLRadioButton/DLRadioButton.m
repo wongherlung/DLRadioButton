@@ -101,16 +101,19 @@ static BOOL _groupModifing = NO;
     
     // draw indicator
     if (selected) {
-        UIBezierPath* indicatorPath;
-        CGRect indicatorRect = CGRectMake((iconSize - indicatorSize) / 2, (iconSize - indicatorSize) / 2, indicatorSize, indicatorSize);
-        if (self.isIconSquare) {
-            indicatorPath = [UIBezierPath bezierPathWithRect:indicatorRect];
-        } else {
-            indicatorPath = [UIBezierPath bezierPathWithOvalInRect:indicatorRect];
-        }
-        [indicatorColor setFill];
-        [indicatorPath fill];
-        CGContextAddPath(context, indicatorPath.CGPath);
+        // This part is edited by wongherlung so that the indicator looks like a tick.
+        CGRect group = CGRectMake(CGRectGetMinX(rect) + 3, CGRectGetMinY(rect) + 3, CGRectGetWidth(rect) - 6, CGRectGetHeight(rect) - 6);
+        UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+        [bezierPath moveToPoint: CGPointMake(CGRectGetMinX(group) + 0.27083 * CGRectGetWidth(group), CGRectGetMinY(group) + 0.54167 * CGRectGetHeight(group))];
+        [bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(group) + 0.41667 * CGRectGetWidth(group), CGRectGetMinY(group) + 0.68750 * CGRectGetHeight(group))];
+        [bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(group) + 0.75000 * CGRectGetWidth(group), CGRectGetMinY(group) + 0.35417 * CGRectGetHeight(group))];
+        bezierPath.lineCapStyle = kCGLineCapSquare;
+        
+        [indicatorColor setStroke];
+        bezierPath.lineWidth = 1.3;
+        [bezierPath stroke];
+        
+        CGContextAddPath(context, bezierPath.CGPath);
     }
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
