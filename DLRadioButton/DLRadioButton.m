@@ -79,7 +79,7 @@ static BOOL _groupModifing = NO;
     UIColor *indicatorColor = self.indicatorColor ? self.indicatorColor : defaulColor;
     CGFloat iconSize = self.iconSize ? self.iconSize : kDefaulIconSize;
     CGFloat iconStrokeWidth = self.iconStrokeWidth ? self.iconStrokeWidth : iconSize / 9;
-    CGFloat indicatorSize = self.indicatorSize ? self.indicatorSize : iconSize * 0.5;
+    // CGFloat indicatorSize = self.indicatorSize ? self.indicatorSize : iconSize * 0.5;
     
     CGRect rect = CGRectMake(0, 0, iconSize, iconSize);
     CGContextRef context = UIGraphicsGetCurrentContext();
